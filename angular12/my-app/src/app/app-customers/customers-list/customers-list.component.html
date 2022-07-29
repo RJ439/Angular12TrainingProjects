@@ -1,0 +1,48 @@
+<h1>{{title}}</h1>
+<h4>Customer Count : {{customers.length}}</h4>
+<style>
+    .totalsRow {
+        background-color: lightblue;
+    }
+    .recordsCountRow {
+        background-color: lightgreen;
+    }
+    .noRecordFoundRow {
+        background-color: red;
+    }
+</style>
+<filter-textbox (filterCriteriaChanged)="filterCustomers($event)"></filter-textbox>
+<button (click)="saveFilterList()">Save List</button> || <button (click)="loadFilterList()">Load List</button>
+<table width="100%">
+    <tr>
+        <th (click)="sortCustomers('id')">Id
+            <img src="../assets/up_arrow.jpg" height="15px" [hidden]="isAscendingSort">
+            <img src="../assets/down_arrow.jpg" height="15px" [hidden]="!isAscendingSort">
+        </th>
+        <th (click)="sortCustomers('name')">Name</th>
+        <th (click)="sortCustomers('city')">City</th>
+        <th (click)="sortCustomers('customerSince')">Customer Since</th>
+        <th (click)="sortCustomers('orderTotal')">Order Total</th>
+    </tr>
+    <tr *ngFor="let cust of filteredCustomers | genericArraySorter:'customerSince':'yes' ">
+        <td align="center">{{cust.id}}</td>
+        <td align="center">{{cust.name | nameTransformer}}</td>
+        <td align="center">{{cust.city}}</td>
+        <td align="center">{{cust.customerSince | date:"yyyy-MM-dd"}}</td>
+        <td align="right">{{cust.orderTotal | currency: currencyCode}}</td>
+    </tr>
+    <!-- Row for Totals -->
+    <tr *ngIf="filteredCustomers && filteredCustomers.length" class="totalsRow">
+        <td colspan="4">Orders Total</td>
+        <td align="right">{{ordersTotal | currency: currencyCode}}</td>
+    </tr>
+    <!-- Row for Record count -->
+    <tr *ngIf="filteredCustomers && filteredCustomers.length" class="recordsCountRow">
+        <td colspan="4">Number of Records</td>
+        <td align="right">{{filteredCustomers.length}}</td>
+    </tr>
+    <!-- Row for Record count -->
+    <tr *ngIf="!filteredCustomers || !filteredCustomers.length" class="noRecordFoundRow">
+        <td align="center" colspan="5">No Records Found</td>
+    </tr>
+</table>

@@ -1,0 +1,18 @@
+<table width="100%">
+    <tr>
+        <th>Id</th>
+        <th>Customer Id</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Line Total</th>
+    </tr>
+    <tr *ngFor="let ord of orders">
+        <td align="center">{{ord.id}}</td>
+        <td align="center">{{ord.customerId}}</td>
+        <td align="center">{{ord.productName}}</td>
+        <td align="center">{{ord.quantity}}</td>
+        <td align="center">{{ord.unitPrice}}</td>
+        <td align="center">{{ord.lineTotal}}</td>
+    </tr>
+</table>

@@ -1,0 +1,10 @@
+<div>
+  <h2>Current State : {{state}}</h2>
+  <h3>Current weight of Truck : {{weight}}</h3>
+  <button (click)="startEngine()">Start Engine</button> ||
+  <button (click)="stopEngine()">Stop Engine</button> ||
+  <br>
+  <br>
+  <input type="text" [(ngModel)]="weight"/>
+  <button (click)="transportLoad()">Transport Load</button>
+</div>
